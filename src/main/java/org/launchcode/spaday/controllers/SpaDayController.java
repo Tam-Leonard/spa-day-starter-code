@@ -63,6 +63,13 @@ public class SpaDayController {
             }
         }
 
+        //typically placed at bottom of methods
+        // this was added on step1 after the menu file
+        model.addAttribute("name", name);
+        model.addAttribute("skintype", skintype);
+        model.addAttribute("manipedi", manipedi);
+        //added on appropriateFacial step2
+        model.addAttribute("appropriateFacials", appropriateFacials);
         return "menu";
     }
 }
