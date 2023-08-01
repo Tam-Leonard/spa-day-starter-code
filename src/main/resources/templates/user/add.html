@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--14.6.3. Rendering the Add User Form Task 2
+ Within the add.html template, create a form that accepts inputs for each of the User class properties.
+ Include an additional password input field to verify the password input.
+ The form should be set up to POST to /user.-->
+    <form method="post" action="/user">
+        <p th:text="${error}" th:if="${error != null}" style="color: red;"></p>
+        <label>Username: <input type="text" name="username" id="username" th:value="${username}"/></label>
+        <br>
+        <label>Email: <input type="email" name="email" id="email" th:value="${email}"/></label>
+        <br>
+        <label>Password: <input type="password" name="password" id="password"/></label>
+        <br>
+        <label>Verify Password: <input type="password" name="verify" id="verify"/></label>
+        <br>
+        <input type="Submit" value="Sign Up!"/>
+        <!--Task 3: Be sure to set type="password" for the password and verify inputs,
+        to ensure the passwords are not visible when being typed into the form.
+        You can also set type="email" on the email input, which will enable some basic
+        client-side validation. We’ll tackle validation in more detail in the next studio.
+         Then put the error on top of the code on the add.html page-->
+
+    </form>
+</body>
+</html>
