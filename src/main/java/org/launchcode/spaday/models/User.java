@@ -2,17 +2,23 @@ package org.launchcode.spaday.models;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import static java.util.Objects.isNull;
 
 public class User {
     @NotBlank(message = "Username is required")
-    @Size(min = 5, max = 15, message = "Username must be between 3 and 12 characters long")
+    @Size(min = 5, max = 15)
     private String username;
-    @Email(message = "Invalid email. Try again.")
+    @Email
     private String email;
     @NotBlank(message="Please enter password")
-    @Size(min = 6, message = "Sorry, but the given password is too short. Passwords must be at least 6 characters long.")
+    @Size(min = 6, message = "Passwords must be at least 6 characters long.")
     private String password;
+    @NotNull(message="Passwords must match")
+    private String verifyPassword;
+
 
     public User() {
 
@@ -25,6 +31,11 @@ public class User {
         this.password = password;
     }
 
+    private void checkPassword(){
+        if ((!isNull(this.password) && !isNull(this.verifyPassword)) && !this.password.equals(this.verifyPassword)) {
+            this.verifyPassword = null;
+        }
+    }
     public String getUsername() {
         return username;
     }
@@ -47,5 +58,14 @@ public class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getVerifyPassword() {
+        return verifyPassword;
+    }
+
+    public void setVerifyPassword(String verifyPassword) {
+        this.verifyPassword = verifyPassword;
+        checkPassword();
     }
 }

@@ -11,37 +11,32 @@ import javax.validation.Valid;
 @Controller
 @RequestMapping("user")
 public class UserController {
-    @GetMapping("/")
+    /*@GetMapping("/add")
     public String displayHomePage(Model model) {
-        return "user/index";
-    }
+        return "user/add";
+    }*/
     @GetMapping("/add")
     public String displayAddUserForm(Model model) {
         model.addAttribute(new User());
         return "user/add";
     }
 
-    @PostMapping
-    public String processAddUserForm(Model model, @ModelAttribute @Valid User user, Errors errors, String verify) {
+    @PostMapping("/add")
+    public String processAddUserForm(Model model, @ModelAttribute @Valid User user, Errors errors) {
         //model.addAttribute("title", "Add New User");
         //model.addAttribute("user", user);
-       model.addAttribute("verify", verify);
+        //model.addAttribute("verify", verify);
         //model.addAttribute("username", user.getUsername());
         //model.addAttribute("email", user.getEmail());
 
-        if(errors.hasErrors() || !user.getPassword().equals(verify)) {
-            if (!user.getPassword().equals(verify)){
+        if (errors.hasErrors() || !user.getPassword().equals(user.getVerifyPassword())) {
+            if (!user.getPassword().equals(user.getVerifyPassword())){
                 model.addAttribute("error", "Passwords do not match");
+            }
             return "user/add";
         }
-        //if (user.getPassword().equals(verify)) {
-           return "user/index";
+            return "user/index";
         }
-        //else {
-            //model.addAttribute("error", "Passwords do not match");
-            return "user/add";
-        }
-
     }
 
 

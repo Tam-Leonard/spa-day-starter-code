@@ -6,32 +6,32 @@
     <title>Sign Up</title>
 </head>
 <body>
-    <form method = 'post' th:action="@{/user}">
+    <form method = 'post'><!-- took this out to make the white error page not show up th:action="@{/user}"-->
         <label>
             Username:
             <input type = 'text' th:value="${user.username}">
             <span class="error" th:errors ="${user.username}"></span>
         </label>
-
+        <br/>
         <label>
             Email:
             <input name = 'email' th:value="${user.email}">
             <span class="error" th:errors ="${user.email}"></span>
-
         </label>
-
+        <br/>
         <label>
             Password:
-            <input type='password' th:value="${user.password}">
+            <input type='password' name='password'>
             <span class="error" th:errors ="${user.password}"></span>
         </label>
+        <br/>
 
         <label>
             Verify Password:
-            <input type = 'password' name = 'verify'>
+            <input type = 'password' name = 'verifyPassword'>
+            <span class="error" th:errors="${user.verifyPassword}"></span>
         </label>
-
-        <p th:text="${error}"></p>
+        <br/>
 
         <input type = 'submit' value = 'Sign Up'>
     </form>
